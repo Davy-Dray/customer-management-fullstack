@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "davydray-api",
+      "image": "davydray/customer_management-api",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-kapcubrvww-stack-awsebrdsdatabase-znclmit9yhd8.csagkf1v2l0e.eu-north-1.rds.amazonaws.com:5432/amigoscode"
+        }
+      ]
+    }
+  ]
+}
