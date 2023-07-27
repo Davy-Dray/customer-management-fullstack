@@ -5,6 +5,7 @@ import com.github.javafaker.Name;
 import com.ragnar.customer_management.customer.Customer;
 import com.ragnar.customer_management.customer.CustomerRegistrationRequest;
 import com.ragnar.customer_management.customer.CustomerUpdateRequest;
+import com.ragnar.customer_management.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,12 +35,14 @@ public class CustomerIT {
         Name fakerName = faker.name();
         String name = fakerName.fullName();
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
+        String password = "password";
         int age = RANDOM.nextInt(1, 30);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
+                age,
+                Gender.FEMALE
         );
 
         String uri = "/api/v1/customers/";
@@ -66,7 +69,10 @@ public class CustomerIT {
         Customer expected = new Customer(
                 name,
                 email,
-                age
+                password,
+                age,
+                Gender.FEMALE
+
         );
         assertThat(customerList)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
@@ -97,12 +103,15 @@ public class CustomerIT {
         Name fakerName = faker.name();
         String name = fakerName.fullName();
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
+        String password = "password";
+
         int age = RANDOM.nextInt(1, 30);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
+                age,
+                Gender.FEMALE
         );
 
         String uri = "/api/v1/customers/";
@@ -166,7 +175,8 @@ public class CustomerIT {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 name,
                 email,
-                age
+                age,
+                Gender.FEMALE
         );
 
         String uri = "/api/v1/customers/";
@@ -205,6 +215,7 @@ public class CustomerIT {
 
                 null,
                 newName,
+                null,
                 null
         );
         
@@ -234,7 +245,7 @@ public class CustomerIT {
                 id,
                 newName,
                 email,
-                age
+                "password", age
         );
         assertThat(updated).isEqualTo(expected);
 

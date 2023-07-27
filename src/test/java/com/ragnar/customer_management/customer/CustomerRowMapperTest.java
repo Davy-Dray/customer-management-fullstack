@@ -1,6 +1,5 @@
 package com.ragnar.customer_management.customer;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -28,7 +27,7 @@ class CustomerRowMapperTest {
                 1,
                 "dave",
                 "dave@gmail.com",
-                19
+                "password", 19
         );
         assertThat(actual).isEqualTo(expected);
 
